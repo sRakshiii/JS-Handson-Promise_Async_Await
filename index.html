@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2 class="head">Promise Async Await</h2>
+    <h3>Q1. Write one example explaining how you can write a callback function.</h3>
+    <pre><h4>Call Back Function - <br>
+        A callback function is a function that is passed as an argument to another function and is called <br> when that function completes its task. Callback functions are commonly used in asynchronous <br> programming to handle the results of a task that may take some time to complete. <br>
+        function sum(num1, num2, callback){
+            const result = num1 + num2;
+            callback(result);
+          }
+          function printResult(output){
+            console.log(`sum is: ${output}`);
+          }
+          sum(10, 25, printResult)</h4>
+    </pre>
+    <hr>
+    <h3><pre>Q2. Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1    <br>    sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+    Explain callback hell.
+    Numbers
+    1
+    2
+    3
+    4
+    5
+    6
+    7</pre></h3>
+    <h3><pre>code:
+      let count = 0;
+      setTimeout(() => {
+          console.log(++count);
+          setTimeout(() => {
+              console.log(++count);
+              setTimeout(() => {
+                  console.log(++count);
+                  setTimeout(() => {
+                      console.log(++count);
+                      setTimeout(() => {
+                          console.log(++count);
+                          setTimeout(() => {
+                              console.log(++count);
+                              setTimeout(() => {
+                                  console.log(++count);
+                              }, 7000);
+                          }, 6000);
+                      }, 5000);
+                  }, 4000);
+              }, 3000);
+          }, 2000);
+      }, 1000);</pre></h3>
+      <h3><pre>
+ Callback hell -
+        A Callback is a great way when dealing with basic cases like minimal asynchronous operations. But <br> when you are developing a web application that has a lot of code, then working with Callback <br> will be messy. This excessive Callback nesting is often referred to as Callback hell.</pre>
+      </h3>
+      <hr>
+      <h3>
+        <pre>Q3. Write the promise function to print numbers from 1 to 7, in which 1 should be printed <br>    after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+    Numbers
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+
+    Code :
+
+    function printNum(nums){
+      return new Promise((res, rej) => {
+          let count = 1;
+          for(let i = 1; i < nums ; i++){
+              setTimeout(() => {
+              console.log(count++);
+              res()
+              }, i * 1000);
+          }
+      })
+    }
+      
+    printNum(8).then();
+    
+      </pre></h3>
+    <hr>
+    <h3>
+      <pre>Q4. Create a promise function accepting an argument, if yes is passed to the function then it <br>    should go to resolved state and print Promise Resolved, and if nothing is passed then it should <br>    go to reject the state and catch the error and print Promise Rejected.
+
+    Code :
+        function promise(num){
+          return new Promise((res, rej) => {
+              if(num){
+                  res('Promise Resolved');
+              }
+              else{
+                  rej('Promise Rejected')
+              }
+          })
+        }
+        promise(20).then((solve) => console.log(solve)).catch((err) => console.log(err)); 
+    </pre>
+    </h3>
+    <hr>
+    <h3>Q5. Create examples to explain callback function. 
+      <pre>Call Back Function - 
+        <br>         you can also pass a function as an argument to a function. This function <br> that is passed as an argument inside of another function is called a callback function. A callback <br> function is a function that is passed as an argument to another function and is then executed by <br> that function. Callback functions are commonly used in asynchronous programming, where a function <br> is called and continues executing while waiting for a response, and then the callback function is <br> executed when the response is received.
+
+    Code : 
+
+      function greet(name, callBack){
+        console.log("Hi" + ' ' + name);
+        callBack();
+      }
+      function callMe(){
+          console.log("I am Callback Function...");
+      }
+      // Passing function as an argument
+      greet();
+      
+      </pre>
+    </h3>
+    <hr>
+  <h3>Q6. Create examples to explain callback hell function? 
+    <pre>Callback Hell :-
+      The phenomenon which happens when we nest multiple callbacks within a function is called a callback <br> hell. The shape of the resulting code structure resembles a pyramid and hence callback hell is <br> also called the “pyramid of the doom”. It makes the code very difficult to understand and maintain.
+
+  Code :
+    function AlphaFunc(alpha, timeout, callBack){
+      setTimeout(() => {
+          console.log(alpha);
+          callBack()
+      }, timeout);
+    }
+    function Abc(){
+        AlphaFunc("A", 2000, () => {
+            AlphaFunc("E", 3000, ()=> {
+                AlphaFunc("I", 1000, ()=> {
+                    AlphaFunc("O", 6000, ()=> {
+                        AlphaFunc("U", 5000,()=>{})
+                    })
+                })
+            })
+        })
+    }
+    Abc();
+    </pre>
+  </h3>
+  <hr>
+  <h3>Q7. Create examples to explain promises function.
+    <pre>Promise Function -
+
+    The Promise Object represents the eventual completion or failure of an asynchronous operation and its resulting value. <br>
+    It takes in two parameters resolve and reject, if we are getting a success response then we will use <br>    resolve to give response, if error comes then we will use reject to give error. <br>
+    It provides two functions .then and .catch. If you want to access response use .then, if you want to <br>    handle error use .catch function. <br>
+    The Promise represents the completion of an asynchronous operation. It returns a single value based on <br>    the operation being rejected or resolved. <br>
+    There are mainly three stages of the Promise, which are shown below:
+      Pending: It is the initial state of each Promise. It represents that the result has not been computed yet.
+      Fulfilled:  It means that the operation has completed.
+      Rejected: It represents a failure that occurs during computation.
+      
+    Once a Promise is fulfilled or rejected, it will be immutable. The Promise() constructor takes two <br>    arguments that are a rejected function and a resolve function. Based on the asynchronous operation, it <br>    returns either the first argument or second argument.
+
+  Example :- 
+
+    function resolvePromise(alpha, timeout){
+      return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log(alpha)
+                resolve("Promise is Resolved Successfully...");
+            }, timeout);
+      })
+    }
+    function vowelAlpha(){
+      resolvePromise('A', 2000)
+      .then(()=> resolvePromise("E", 3000))
+      .then(()=> resolvePromise("I", 4000))
+      .then(()=> resolvePromise("O", 2000))
+      .then(()=> resolvePromise("U", 7000))
+    }vowelAlpha();
+
+      </pre>
+  </h3>
+  <hr>
+  <h3>Q8. Create examples to explain async await function.
+    <pre>Async and Await :- 
+
+        An async keyword will be added to a function when you want that function to platform in an asynchronous way in JS. <br>For this asynchronous behavior we have to write the await keyword in the line where we want the code to hold.
+
+    Code Example - 
+        async function f() {
+
+          let promise = new Promise((resolve, reject) => {
+            setTimeout(() => resolve("done!"), 1000)
+          });
+        
+          let result = await promise; // wait until the promise resolves 
+        
+          console.log(result); // "done!"
+        }
+        
+        f();
+      </pre>
+  </h3>
+  <hr>
+  <h3>Q9. Create examples to explain promise.all function.
+    <pre>Promise.all() - 
+
+      The Promise.all() static method takes an iterable of promises as input and returns a single Promise. <br> This returned promise fulfills when all of the input's promises fulfill, with an array of the <br> fulfillment values. It rejects when any of the input's promises rejects, with this first rejection reason.
+
+    Code Example - 
+
+      const promise1 = Promise.resolve(3);
+      const promise2 = 42;
+      const promise3 = new Promise((resolve, reject) => {
+        setTimeout(resolve, 100, 'hi');
+      });
+
+      Promise.all([promise1, promise2, promise3]).then((values) => {
+        console.log(values);
+      });
+      // Expected output: Array [3, 42, "hi"]
+    </pre>
+  </h3>
+  <hr>
+
+</body>
+<script src="./myScript.js"></script>
+</html>
